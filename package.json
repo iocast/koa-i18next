@@ -1,14 +1,14 @@
 {
   "name": "@iocast/koa-i18next",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "i18next middleware for koa",
   "main": "lib",
   "scripts": {
     "build": "babel src -d dist",
     "prepublishOnly": "npm run build",
-    "patch": "npm version patch && npm publish",
-    "minor": "npm version minor && npm publish",
-    "major": "npm version major && npm publish",
+    "patch": "npm version patch && npm publish --access public",
+    "minor": "npm version minor && npm publish --access public",
+    "major": "npm version major && npm publish --access public",
     "postpublish": "git push origin master --follow-tags"
   },
   "repository": {
