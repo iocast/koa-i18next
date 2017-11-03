@@ -6,7 +6,7 @@
 npm install --save @icoast/koa-i18next i18next i18next-node-fs-backend
 ```
 
-## Useage
+## Usage
 
 ```javascript
 import Koa from 'koa';
