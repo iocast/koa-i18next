@@ -1,13 +1,24 @@
 {
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "node": "current"
-        }
-      }
-    ]
-  ],
-  "plugins": []
+  "env": {
+    "commonjs": {
+      "presets": [
+        ["env", {
+          "useBuiltIns": false
+        }]
+      ]
+    },
+    "es": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
+      "plugins": []
+    }
+  }
 }

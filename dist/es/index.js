@@ -1,5 +1,4 @@
-'use strict'
-
+'use strict';
 
 /**
  * tries to find the current locale
@@ -8,11 +7,15 @@
  * 2. cookie: locale=zh-TW
  * 3. header: Accept-Language: fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5
  */
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 function __getLocale(ctx, options) {
   let locale = undefined;
 
   // 1. query: /?locale=en-US
-  locale = ctx.request.query[options.queryField]
+  locale = ctx.request.query[options.queryField];
 
   // 2. cookie: locale=zh-TW
   if (!locale) {
@@ -34,10 +37,10 @@ function __getLocale(ctx, options) {
     }
   }
 
-  return (locale) ? locale : ctx.i18n.languages[0];
+  return locale ? locale : ctx.i18n.languages[0];
 }
 
-export default i18nextMiddleware = (i18next, app, options = {
+exports.default = i18nextMiddleware = (i18next, app, options = {
   functionName: '__',
   queryField: 'locale',
   cookieField: 'locale'
@@ -46,14 +49,13 @@ export default i18nextMiddleware = (i18next, app, options = {
   app.context.i18n = i18next;
   app.context[options.functionName] = i18next.t.bind(i18next);
 
-  Object.defineProperty(app.context,
-    'locale', {
-      get: () => {
-        return i18next.language
-      }
-    });
+  Object.defineProperty(app.context, 'locale', {
+    get: () => {
+      return i18next.language;
+    }
+  });
 
-  app.context.changeLocale = async (locale) => {
+  app.context.changeLocale = async locale => {
     return new Promise((resolve, reject) => {
       i18next.changeLanguage(locale, (err, t) => {
 
@@ -65,7 +67,7 @@ export default i18nextMiddleware = (i18next, app, options = {
         resolve(t);
       });
     });
-  }
+  };
   /*
   i18next.on('failedLoading', (lng, ns, msg) => {
     console.log("*****************************");
@@ -75,8 +77,7 @@ export default i18nextMiddleware = (i18next, app, options = {
     console.log(msg);
     console.log("*****************************");
   });
-
-  i18next.on('missingKey', (lngs, namespace, key, res) => {
+   i18next.on('missingKey', (lngs, namespace, key, res) => {
     console.log("*****************************");
     console.log('missingKey');
     console.log(lngs);
@@ -87,14 +88,11 @@ export default i18nextMiddleware = (i18next, app, options = {
   });
   */
 
-
   return async (ctx, next) => {
     let locale = __getLocale(ctx, options);
     // TODO: what if it returns undefined?
     await ctx.changeLocale(locale);
 
     await next();
-
-  }
-
-}
+  };
+};
