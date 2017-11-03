@@ -11,6 +11,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = i18nextMiddleware;
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -64,7 +65,9 @@ function __getLocale(ctx, options) {
   return locale ? locale : ctx.i18n.languages[0];
 }
 
-exports.default = i18nextMiddleware = function i18nextMiddleware(i18next, app) {
+function i18nextMiddleware(i18next, app) {
+  var _this = this;
+
   var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
     functionName: '__',
     queryField: 'locale',
@@ -104,7 +107,7 @@ exports.default = i18nextMiddleware = function i18nextMiddleware(i18next, app) {
               return _context.stop();
           }
         }
-      }, _callee, undefined);
+      }, _callee, _this);
     }));
 
     return function (_x2) {
@@ -153,11 +156,11 @@ exports.default = i18nextMiddleware = function i18nextMiddleware(i18next, app) {
               return _context2.stop();
           }
         }
-      }, _callee2, undefined);
+      }, _callee2, _this);
     }));
 
     return function (_x3, _x4) {
       return _ref2.apply(this, arguments);
     };
   }();
-};
+}

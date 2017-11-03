@@ -37,11 +37,11 @@ function __getLocale(ctx, options) {
   return (locale) ? locale : ctx.i18n.languages[0];
 }
 
-export default i18nextMiddleware = (i18next, app, options = {
+export default function i18nextMiddleware(i18next, app, options = {
   functionName: '__',
   queryField: 'locale',
   cookieField: 'locale'
-}) => {
+}) {
 
   app.context.i18n = i18next;
   app.context[options.functionName] = i18next.t.bind(i18next);

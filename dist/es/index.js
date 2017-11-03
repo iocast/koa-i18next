@@ -11,6 +11,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = i18nextMiddleware;
 function __getLocale(ctx, options) {
   let locale = undefined;
 
@@ -40,11 +41,11 @@ function __getLocale(ctx, options) {
   return locale ? locale : ctx.i18n.languages[0];
 }
 
-exports.default = i18nextMiddleware = (i18next, app, options = {
+function i18nextMiddleware(i18next, app, options = {
   functionName: '__',
   queryField: 'locale',
   cookieField: 'locale'
-}) => {
+}) {
 
   app.context.i18n = i18next;
   app.context[options.functionName] = i18next.t.bind(i18next);
@@ -95,4 +96,4 @@ exports.default = i18nextMiddleware = (i18next, app, options = {
 
     await next();
   };
-};
+}
