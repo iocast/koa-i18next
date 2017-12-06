@@ -20,7 +20,9 @@ function __getLocale(ctx, options) {
 
   // 2. cookie: locale=zh-TW
   if (!locale) {
-    locale = ctx.cookies.get(options.cookieField, { signed: false });
+    locale = ctx.cookies.get(options.cookieField, {
+      signed: false
+    });
   }
 
   // 3. header: Accept-Language: fr-CH,fr;q=0.9,en;q=0.8,de;q=0.7,*;q=0.5
@@ -29,7 +31,10 @@ function __getLocale(ctx, options) {
 
     if (languages && Array.isArray(languages)) {
       for (let lng of languages) {
+        // let cleanedLng = ctx.i18n.default.services.languageUtils.formatLanguageCode(lng);
         let cleanedLng = ctx.i18n.services.languageUtils.formatLanguageCode(lng);
+
+        // if (ctx.i18n.default.services.languageUtils.isWhitelisted(cleanedLng)) {
         if (ctx.i18n.services.languageUtils.isWhitelisted(cleanedLng)) {
           locale = cleanedLng;
           break;
@@ -38,6 +43,7 @@ function __getLocale(ctx, options) {
     }
   }
 
+  // return (locale) ? locale : ctx.i18n.default.languages[0];
   return locale ? locale : ctx.i18n.languages[0];
 }
 
@@ -78,7 +84,7 @@ function i18nextMiddleware(i18next, app, options = {
     console.log(msg);
     console.log("*****************************");
   });
-   i18next.on('missingKey', (lngs, namespace, key, res) => {
+    i18next.on('missingKey', (lngs, namespace, key, res) => {
     console.log("*****************************");
     console.log('missingKey');
     console.log(lngs);
